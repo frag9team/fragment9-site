@@ -33,11 +33,11 @@
             height: 100%;
             background: linear-gradient(
                 135deg,
-                rgba(0, 255, 255, 0.03) 0%,
-                rgba(255, 0, 128, 0.03) 25%,
-                rgba(128, 0, 255, 0.03) 50%,
-                rgba(0, 255, 128, 0.03) 75%,
-                rgba(255, 128, 0, 0.03) 100%
+                rgba(255, 150, 143, 0.03) 0%,
+                rgba(237, 96, 113, 0.03) 25%,
+                rgba(255, 255, 255, 0.02) 50%,
+                rgba(255, 150, 143, 0.03) 75%,
+                rgba(237, 96, 113, 0.03) 100%
             );
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
@@ -64,19 +64,19 @@
             position: absolute;
             width: 2px;
             height: 2px;
-            background: #00ffff;
+            background: #ff968f;
             border-radius: 50%;
             animation: float 6s infinite linear;
             opacity: 0.6;
         }
 
         .particle:nth-child(odd) {
-            background: #ff0080;
+            background: #ed6071;
             animation-duration: 8s;
         }
 
         .particle:nth-child(3n) {
-            background: #8000ff;
+            background: #ffffff;
             animation-duration: 10s;
         }
 
@@ -125,7 +125,7 @@
             font-size: 4.5rem;
             font-weight: 800;
             margin-bottom: 24px;
-            background: linear-gradient(135deg, #00ffff 0%, #ff0080 50%, #8000ff 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #ff968f 50%, #ed6071 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -142,18 +142,18 @@
             transform: translateX(-50%);
             width: 100px;
             height: 3px;
-            background: linear-gradient(90deg, #00ffff, #ff0080, #8000ff);
+            background: linear-gradient(90deg, #ffffff, #ff968f, #ed6071);
             border-radius: 2px;
             animation: underlineGlow 2s ease-in-out infinite alternate;
         }
 
         @keyframes underlineGlow {
             0% { 
-                box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+                box-shadow: 0 0 5px rgba(255, 150, 143, 0.5);
                 width: 100px;
             }
             100% { 
-                box-shadow: 0 0 20px rgba(255, 0, 128, 0.8);
+                box-shadow: 0 0 20px rgba(237, 96, 113, 0.8);
                 width: 120px;
             }
         }
@@ -169,8 +169,8 @@
         .contact-btn {
             display: inline-flex;
             align-items: center;
-            background: linear-gradient(135deg, #00ffff 0%, #ff0080 100%);
-            color: #000;
+            background: linear-gradient(135deg, #ff968f 0%, #ed6071 100%);
+            color: #ffffff;
             padding: 18px 36px;
             text-decoration: none;
             border-radius: 50px;
@@ -178,7 +178,7 @@
             font-size: 1.1rem;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 
-                0 10px 30px rgba(0, 255, 255, 0.3),
+                0 10px 30px rgba(255, 150, 143, 0.3),
                 0 0 0 0 rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
@@ -198,7 +198,7 @@
         .contact-btn:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 
-                0 20px 50px rgba(0, 255, 255, 0.4),
+                0 20px 50px rgba(255, 150, 143, 0.4),
                 0 0 0 8px rgba(255, 255, 255, 0.1);
         }
 
@@ -233,7 +233,7 @@
             margin-bottom: 32px;
             text-align: center;
             font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 0%, #00ffff 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #ff968f 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -254,25 +254,37 @@
         }
 
         /* Specialized section styling */
+        .vision {
+            background: rgba(255, 150, 143, 0.03);
+            border: 1px solid rgba(255, 150, 143, 0.2);
+        }
+
+        .vision .section-title {
+            background: linear-gradient(135deg, #ff968f 0%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .what-we-do {
-            background: rgba(0, 255, 255, 0.03);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            background: rgba(237, 96, 113, 0.03);
+            border: 1px solid rgba(237, 96, 113, 0.2);
         }
 
         .what-we-do .section-title {
-            background: linear-gradient(135deg, #00ffff 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #ed6071 0%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .who-were-for {
-            background: rgba(255, 0, 128, 0.03);
-            border: 1px solid rgba(255, 0, 128, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .who-were-for .section-title {
-            background: linear-gradient(135deg, #ff0080 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #ff968f 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -286,21 +298,44 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            background: linear-gradient(90deg, transparent, #ff968f, transparent);
             opacity: 0;
             transition: opacity 0.6s ease;
         }
 
+        .vision::before {
+            background: linear-gradient(90deg, transparent, #ff968f, transparent);
+        }
+
         .what-we-do::before {
-            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            background: linear-gradient(90deg, transparent, #ed6071, transparent);
         }
 
         .who-were-for::before {
-            background: linear-gradient(90deg, transparent, #ff0080, transparent);
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
         }
 
         .section-card:hover::before {
             opacity: 1;
+        }
+
+        /* Dev phase indicator */
+        .dev-indicator {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 150, 143, 0.1);
+            color: #ff968f;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 150, 143, 0.3);
+        }
+
+        .dev-indicator::before {
+            content: '⚡';
+            margin-right: 8px;
         }
 
         /* Footer */
@@ -387,6 +422,7 @@
 
         .section:nth-child(1) { animation-delay: 0.2s; }
         .section:nth-child(2) { animation-delay: 0.4s; }
+        .section:nth-child(3) { animation-delay: 0.6s; }
 
         @keyframes fadeInUp {
             to {
@@ -430,7 +466,7 @@
     <header>
         <div class="container">
             <h1 class="logo">Fragment9</h1>
-            <p class="tagline">Cybersecurity Lab + Service Incubator</p>
+            <p class="tagline">ML-Driven Cybersecurity Research & Development</p>
             <a href="mailto:founder@fragment9.com" class="contact-btn">Contact Us</a>
         </div>
     </header>
@@ -438,11 +474,22 @@
     <main>
         <div class="container">
             <section class="section">
+                <div class="section-card glass vision">
+                    <div class="dev-indicator">Development Phase</div>
+                    <h2 class="section-title">Our Vision</h2>
+                    <div class="section-content">
+                        <p>Fragment9 aims to redefine cybersecurity through intelligent, machine learning–driven tools that proactively defend creators, users, and digital systems against modern threats.</p>
+                        <p>Our vision is to make advanced threat detection and data protection accessible and privacy-focused—fusing research with real-world application. As we continue building, Fragment9 remains in its development phase, focused on prototyping, testing, and validating open-source tools that bridge innovation and defense.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
                 <div class="section-card glass what-we-do">
                     <h2 class="section-title">What We Do</h2>
                     <div class="section-content">
-                        <p>Fragment9 is an early-stage cybersecurity startup focused on building tools, running experiments, and supporting creator privacy and digital safety.</p>
-                        <p>We're currently in stealth mode, but working hard to bring new ideas to life — from data leak detection to ethical hacking labs.</p>
+                        <p>Fragment9 is an early-stage cybersecurity startup and R&D lab designing machine learning-based security tools across multiple domains: threat detection and anomaly-based IDS, phishing detection using NLP, data leak and privacy breach monitoring, and malware analysis with behavioral classification.</p>
+                        <p>We're currently in stealth mode, focusing on open-source tooling, lightweight deployments, and real-world usability as we lay the groundwork for potential SaaS offerings and contributions to the broader cybersecurity community.</p>
                     </div>
                 </div>
             </section>
@@ -451,7 +498,7 @@
                 <div class="section-card glass who-were-for">
                     <h2 class="section-title">Who We're For</h2>
                     <div class="section-content">
-                        <p>We support independent creators, digital entrepreneurs, and small organizations who want to stay secure without big budgets.</p>
+                        <p>We support independent creators, digital entrepreneurs, and small organizations who want to stay secure without big budgets. Our tools are designed for those who need enterprise-level protection with accessible, privacy-focused solutions.</p>
                     </div>
                 </div>
             </section>
