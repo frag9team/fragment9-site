@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | Fragment9 - Cybersecurity R&D Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #0f1419;
+            color: #e2e8f0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 150, 143, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 150, 143, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 2px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 18px;
+            color: rgba(226, 232, 240, 0.7);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: #ff968f;
+            background: rgba(255, 150, 143, 0.08);
+            border-color: rgba(255, 150, 143, 0.2);
+        }
+
+        .nav-link.active {
+            color: #ff968f;
+            background: rgba(255, 150, 143, 0.12);
+            border-color: rgba(255, 150, 143, 0.3);
+            font-weight: 600;
+        }
+
+        .nav-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+        }
+
+        header {
+            padding: 120px 0 50px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(180deg, rgba(15, 20, 25, 0.8) 0%, rgba(15, 20, 25, 1) 100%);
+        }
+
+        .header-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            text-align: left;
+            max-width: 900px;
+        }
+
+        .page-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #ff968f;
+            margin-bottom: 25px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .page-description {
+            font-size: 1.1rem;
+            color: rgba(226, 232, 240, 0.8);
+            line-height: 1.7;
+            max-width: 700px;
+        }
+
+        main {
+            padding: 60px 0;
+        }
+
+        .content-section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 150, 143, 0.2);
+        }
+
+        .section-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(255, 150, 143, 0.3);
+            margin-right: 20px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: rgba(226, 232, 240, 0.6);
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .research-areas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .research-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-color);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .research-card:hover::before {
+            opacity: 1;
+        }
+
+        .research-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .research-card.ml-security { --accent-color: #ff968f; }
+        .research-card.threat-detection { --accent-color: #ed6071; }
+        .research-card.privacy-tech { --accent-color: #a78bfa; }
+        .research-card.behavioral-analysis { --accent-color: #34d399; }
+
+        .research-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .research-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            color: var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .research-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .research-status {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .research-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(226, 232, 240, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .research-technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(226, 232, 240, 0.9);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .method-card {
+            background: linear-gradient(135deg, rgba(255, 150, 143, 0.05) 0%, rgba(237, 96, 113, 0.05) 100%);
+            border: 1px solid rgba(255, 150, 143, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .method-card:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, rgba(255, 150, 143, 0.08) 0%, rgba(237, 96, 113, 0.08) 100%);
+        }
+
+        .method-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .step-number {
+            width: 35px;
+            height: 35px;
+            background: #ff968f;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #ffffff;
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+
+        .method-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .method-card p {
+            font-size: 0.9rem;
+            color: rgba(226, 232, 240, 0.8);
+            line-height: 1.6;
+        }
+
+        .publications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+        }
+
+        .publication-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .publication-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 150, 143, 0.3);
+            background: rgba(255, 150, 143, 0.05);
+        }
+
+        .publication-type {
+            display: inline-block;
+            background: rgba(255, 150, 143, 0.2);
+            color: #ff968f;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .publication-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .publication-meta {
+            font-size: 0.85rem;
+            color: rgba(226, 232, 240, 0.6);
+            margin-bottom: 15px;
+        }
+
+        .publication-abstract {
+            font-size: 0.9rem;
+            color: rgba(226, 232, 240, 0.8);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .publication-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .publication-link {
+            font-size: 0.8rem;
+            color: #ff968f;
+            text-decoration: none;
+            padding: 6px 12px;
+            border: 1px solid rgba(255, 150, 143, 0.3);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .publication-link:hover {
+            background: rgba(255, 150, 143, 0.1);
+            border-color: rgba(255, 150, 143, 0.5);
+        }
+
+        .collaboration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .collaboration-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .collaboration-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 150, 143, 0.3);
+            background: rgba(255, 150, 143, 0.05);
+        }
+
+        .collaboration-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px;
+            color: #ff968f;
+        }
+
+        .collaboration-card h4 {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .collaboration-card p {
+            font-size: 0.9rem;
+            color: rgba(226, 232, 240, 0.8);
+            line-height: 1.6;
+        }
+
+        footer {
+            background: rgba(10, 10, 15, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-text {
+            color: rgba(226, 232, 240, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #e2e8f0;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                justify-content: space-between;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 20, 25, 0.98);
+                backdrop-filter: blur(20px);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-link {
+                width: calc(100% - 32px);
+                margin: 4px 16px;
+                padding: 12px 16px;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .section-header {
+                align-items: flex-start;
+            }
+
+            .section-number {
+                font-size: 2rem;
+                margin-right: 15px;
+                flex-shrink: 0;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .research-areas {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .methodology-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .publications-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .collaboration-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            header {
+                padding: 100px 0 40px;
+            }
+        }
+
+        .content-section {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .content-section:nth-child(1) { animation-delay: 0.1s; }
+        .content-section:nth-child(2) { animation-delay: 0.2s; }
+        .content-section:nth-child(3) { animation-delay: 0.3s; }
+        .content-section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <button class="nav-toggle" onclick="toggleNav()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="/index.html" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/research.html" class="nav-link active">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
+                        </svg>
+                        Research
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/projects.html" class="nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09c.66 0 1.26-.39 1.51-1a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09c.61-.16 1-.75 1-1.37V3a2 2 0 1 1 4 0v.09c0 .66.39 1.26 1 1.51h.09c.41.17.87.11 1.22-.13a1.65 1.65 0 0 0 .6-.6 2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09c.16.61.75 1 1.37 1H21a2 2 0 1 1 0 4h-.09c-.62 0-1.21.39-1.37 1z"/>
+                        </svg>
+                        Projects
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blog.html" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+                        </svg>
+                        Blog
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contact.html" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+                        </svg>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <p class="page-subtitle">Academic Foundation</p>
+                    <h1 class="page-title">Research Areas & Methodology</h1>
+                    <p class="page-description">Fragment9's research foundation explores the theoretical underpinnings of cybersecurity through rigorous academic inquiry, establishing the scientific basis for practical security solutions.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="content-section">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <div>
+                        <h2 class="section-title">Research Domains</h2>
+                        <p class="section-subtitle">Core theoretical areas of investigation</p>
+                    </div>
+                </div>
+                <div class="research-areas">
+                    <div class="research-card ml-security">
+                        <div class="research-header">
+                            <svg class="research-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z"/>
+                            </svg>
+                            <div>
+                                <h3>Machine Learning Security</h3>
+                                <span class="research-status">Active Research</span>
+                            </div>
+                        </div>
+                        <p>Investigating the theoretical foundations of adaptive machine learning models for cybersecurity applications, with focus on adversarial robustness and model interpretability.</p>
+                        <p>Research into ensemble methods, deep learning architectures, and federated learning approaches for distributed security environments.</p>
+                        <div class="research-technologies">
+                            <span class="tech-tag">Adversarial ML</span>
+                            <span class="tech-tag">Model Interpretability</span>
+                            <span class="tech-tag">Ensemble Theory</span>
+                            <span class="tech-tag">Federated Learning</span>
+                        </div>
+                    </div>
+                    <div class="research-card threat-detection">
+                        <div class="research-header">
+                            <svg class="research-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.4 16,13V16C16,17.4 15.4,18 14.8,18H9.2C8.6,18 8,17.4 8,16V13C8,12.4 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                            </svg>
+                            <div>
+                                <h3>Anomaly Detection Theory</h3>
+                                <span class="research-status">Theoretical Development</span>
+                            </div>
+                        </div>
+                        <p>Exploring statistical foundations and mathematical models for anomaly detection in complex cybersecurity environments, focusing on zero-day exploit identification.</p>
+                        <p>Research into unsupervised learning methodologies and their application to novel attack pattern recognition in high-dimensional security data.</p>
+                        <div class="research-technologies">
+                            <span class="tech-tag">Statistical Modeling</span>
+                            <span class="tech-tag">Unsupervised Learning</span>
+                            <span class="tech-tag">Information Theory</span>
+                            <span class="tech-tag">Pattern Recognition</span>
+                        </div>
+                    </div>
+                    <div class="research-card privacy-tech">
+                        <div class="research-header">
+                            <svg class="research-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
+                            </svg>
+                            <div>
+                                <h3>Cryptographic Privacy</h3>
+                                <span class="research-status">Mathematical Analysis</span>
+                            </div>
+                        </div>
+                        <p>Mathematical exploration of homomorphic encryption schemes and differential privacy mechanisms for secure computation in cybersecurity applications.</p>
+                        <p>Theoretical development of privacy-preserving protocols that maintain security detection effectiveness while protecting sensitive data.</p>
+                        <div class="research-technologies">
+                            <span class="tech-tag">Homomorphic Encryption</span>
+                            <span class="tech-tag">Differential Privacy</span>
+                            <span class="tech-tag">Zero-Knowledge Proofs</span>
+                            <span class="tech-tag">Secure Computation</span>
+                        </div>
+                    </div>
+                    <div class="research-card behavioral-analysis">
+                        <div class="research-header">
+                            <svg class="research-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L18.29,8.29L16,6Z"/>
+                            </svg>
+                            <div>
+                                <h3>Behavioral Analytics Theory</h3>
+                                <span class="research-status">Mathematical Modeling</span>
+                            </div>
+                        </div>
+                        <p>Mathematical foundations of user and entity behavior analytics, exploring graph theory and time-series analysis for understanding complex behavioral patterns in security contexts.</p>
+                        <p>Research into stochastic processes and network analysis techniques for modeling normal versus anomalous behavior in enterprise environments.</p>
+                        <div class="research-technologies">
+                            <span class="tech-tag">Graph Theory</span>
+                            <span class="tech-tag">Time Series Analysis</span>
+                            <span class="tech-tag">Stochastic Processes</span>
+                            <span class="tech-tag">Network Analysis</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <div>
+                        <h2 class="section-title">Research Methodology</h2>
+                        <p class="section-subtitle">Systematic approach to cybersecurity research</p>
+                    </div>
+                </div>
+                <div class="methodology-grid">
+                    <div class="method-card">
+                        <div class="method-step">
+                            <span class="step-number">1</span>
+                            <h4>Literature Review</h4>
+                        </div>
+                        <p>Comprehensive analysis of existing cybersecurity research, identifying knowledge gaps and establishing theoretical foundations for novel approaches to security challenges.</p>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-step">
+                            <span class="step-number">2</span>
+                            <h4>Hypothesis Formation</h4>
+                        </div>
+                        <p>Development of testable hypotheses based on theoretical frameworks, focusing on measurable improvements to current cybersecurity methodologies and approaches.</p>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-step">
+                            <span class="step-number">3</span>
+                            <h4>Mathematical Modeling</h4>
+                        </div>
+                        <p>Creation of formal mathematical models and algorithms that capture the essence of cybersecurity problems, enabling rigorous analysis and optimization.</p>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-step">
+                            <span class="step-number">4</span>
+                            <h4>Experimental Design</h4>
+                        </div>
+                        <p>Design of controlled experiments and simulation environments to validate theoretical models and measure their effectiveness against established baselines.</p>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-step">
+                            <span class="step-number">5</span>
+                            <h4>Peer Review Process</h4>
+                        </div>
+                        <p>Submission of findings to peer-reviewed journals and conferences, ensuring research meets academic standards and contributes to the broader scientific community.</p>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-step">
+                            <span class="step-number">6</span>
+                            <h4>Knowledge Transfer</h4>
+                        </div>
+                        <p>Translation of theoretical findings into practical applications, bridging the gap between academic research and real-world cybersecurity implementations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <div>
+                        <h2 class="section-title">Publications & Papers</h2>
+                        <p class="section-subtitle">Academic contributions and research findings</p>
+                    </div>
+                </div>
+                <div class="publications-grid">
+                    <div class="publication-card">
+                        <span class="publication-type">Working Paper</span>
+                        <h3 class="publication-title">Adversarial Robustness in Lightweight Network Intrusion Detection Systems</h3>
+                        <div class="publication-meta">Fragment9 Research Team • 2025 • In Review</div>
+                        <p class="publication-abstract">This paper explores the vulnerability of resource-constrained intrusion detection systems to adversarial attacks and proposes novel defense mechanisms that maintain detection accuracy while operating under computational constraints.</p>
+                        <div class="publication-links">
+                            <a href="#" class="publication-link">Preprint</a>
+                            <a href="#" class="publication-link">Code</a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <div>
+                        <h2 class="section-title">Collaborations & Partnerships</h2>
+                        <p class="section-subtitle">Academic and industry research partnerships</p>
+                    </div>
+                </div>
+                <div class="collaboration-grid">
+                    <div class="collaboration-card">
+                        <svg class="collaboration-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"/>
+                        </svg>
+                        <h4>Academic Partnerships</h4>
+                        <p>Collaborative research relationships with universities and research institutions, focusing on fundamental cybersecurity research and graduate student mentorship programs.</p>
+                    </div>
+
+                    <div class="collaboration-card">
+                        <svg class="collaboration-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+                        </svg>
+                        <h4>Research Grants</h4>
+                        <p>Active pursuit of funding opportunities from government agencies and private foundations to support long-term cybersecurity research initiatives and infrastructure development.</p>
+                    </div>
+
+                    <div class="collaboration-card">
+                        <svg class="collaboration-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16,17V19H2V17S2,13 9,13 16,17 16,17M12.5,7.5A3.5,3.5 0 0,1 9,11A3.5,3.5 0 0,1 5.5,7.5A3.5,3.5 0 0,1 9,4A3.5,3.5 0 0,1 12.5,7.5M15.94,13A5.32,5.32 0 0,1 18,17V19H22V17S22,13.37 15.94,13M15,4A3.39,3.39 0 0,1 16.56,6.62A3.5,3.5 0 0,1 16.56,8.38A3.39,3.39 0 0,1 15,11A3.39,3.39 0 0,1 13.44,8.38A3.5,3.5 0 0,1 13.44,6.62A3.39,3.39 0 0,1 15,4Z"/>
+                        </svg>
+                        <h4>Conference Participation</h4>
+                        <p>Regular participation in leading cybersecurity conferences and workshops, presenting research findings and engaging with the global security research community.</p>
+                    </div>
+
+                    <div class="collaboration-card">
+                        <svg class="collaboration-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"/>
+                        </svg>
+                        <h4>Industry Advisory</h4>
+                        <p>Consulting relationships with cybersecurity companies and organizations, providing research-based insights and guidance on emerging security challenges and solutions.</p>
+                    </div>
+
+                    <div class="collaboration-card">
+                        <svg class="collaboration-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,5V19H5V5H19Z"/>
+                        </svg>
+                        <h4>Open Source Community</h4>
+                        <p>Active contribution to open source cybersecurity projects and research repositories, promoting transparency and collaborative development in security research.</p>
+                    </div>
+
+                    <div class="collaboration-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="collaboration-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2l2.09 6.26L22 9l-5.5 4.26L17.91 22 12 17.77 6.09 22 7.5 13.26 2 9l7.91-0.74L12 2z"/>
+</svg>
+                        <h4>Research Excellence</h4>
+                        <p>Commitment to maintaining high standards of research integrity, reproducibility, and ethical conduct in all cybersecurity research endeavors and publications.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">© 2025 Fragment9. Advancing cybersecurity through research and innovation.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleNav() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
