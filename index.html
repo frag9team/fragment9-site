@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fragment9 | Cybersecurity Lab + Service Incubator</title>
+    <title>Fragment9 | Cybersecurity R&D Lab</title>
     <style>
         * {
             margin: 0;
@@ -13,8 +13,8 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            background: #0a0a0f;
-            color: #ffffff;
+            background: #0f1419;
+            color: #e2e8f0;
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
@@ -23,7 +23,6 @@
             position: relative;
         }
 
-        /* Animated background gradient */
         body::before {
             content: '';
             position: fixed;
@@ -31,25 +30,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                135deg,
-                rgba(255, 150, 143, 0.03) 0%,
-                rgba(237, 96, 113, 0.03) 25%,
-                rgba(255, 255, 255, 0.02) 50%,
-                rgba(255, 150, 143, 0.03) 75%,
-                rgba(237, 96, 113, 0.03) 100%
-            );
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            background-image: 
+                linear-gradient(rgba(255, 150, 143, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 150, 143, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
             z-index: -2;
+            opacity: 0.3;
         }
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Floating particles */
         .particles {
             position: fixed;
             top: 0;
@@ -58,6 +46,7 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
+            overflow: hidden;
         }
 
         .particle {
@@ -66,24 +55,21 @@
             height: 2px;
             background: #ff968f;
             border-radius: 50%;
-            animation: float 6s infinite linear;
-            opacity: 0.9;
-            filter: blur(0.5px); /* subtle glow */
+            opacity: 0;
+            filter: blur(0.5px);
             box-shadow: 0 0 6px rgba(255, 150, 143, 0.8);
             mix-blend-mode: screen;
         }
 
         .particle:nth-child(odd) {
             background: #ed6071;
-            animation-duration: 8s;
         }
 
         .particle:nth-child(3n) {
             background: #ffffff;
-            animation-duration: 10s;
         }
 
-        @keyframes float {
+        @keyframes floatUp {
             0% {
                 transform: translateY(100vh) translateX(0px);
                 opacity: 0;
@@ -95,33 +81,98 @@
                 opacity: 0.6;
             }
             100% {
-                transform: translateY(-100px) translateX(100px);
+                transform: translateY(-20px) translateX(40px);
                 opacity: 0;
             }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Glass morphism effect */
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Header Styles */
+        .nav-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 2px;
+        }
+
+        .nav-item {
+            margin: 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 18px;
+            color: rgba(226, 232, 240, 0.7);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: #ff968f;
+            background: rgba(255, 150, 143, 0.08);
+            border-color: rgba(255, 150, 143, 0.2);
+        }
+
+        .nav-link.active {
+            color: #ff968f;
+            background: rgba(255, 150, 143, 0.12);
+            border-color: rgba(255, 150, 143, 0.3);
+            font-weight: 600;
+        }
+
+        .nav-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #e2e8f0;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
         header {
-            padding: 80px 0 100px;
+            padding: 140px 0 80px;
             text-align: center;
             position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(180deg, rgba(15, 20, 25, 0.8) 0%, rgba(15, 20, 25, 1) 100%);
         }
 
         .logo {
@@ -163,7 +214,7 @@
 
         .tagline {
             font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(226, 232, 240, 0.8);
             margin-bottom: 48px;
             font-weight: 400;
             letter-spacing: 0.5px;
@@ -209,30 +260,35 @@
             left: 100%;
         }
 
-        /* Main Content */
         main {
             flex: 1;
             padding: 60px 0;
         }
 
         .section {
-            margin-bottom: 100px;
+            margin-bottom: 80px;
             padding: 0 20px;
         }
 
         .section-card {
-            padding: 60px 50px;
-            margin: 50px 0;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 50px 40px;
+            margin: 40px 0;
             position: relative;
             transition: all 0.6s ease;
         }
 
         .section-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
         .section-title {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             margin-bottom: 32px;
             text-align: center;
             font-weight: 700;
@@ -246,9 +302,9 @@
         .section-content {
             max-width: 800px;
             margin: 0 auto;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             line-height: 1.8;
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(226, 232, 240, 0.85);
             text-align: center;
         }
 
@@ -256,13 +312,12 @@
             margin-bottom: 24px;
         }
 
-        /* Specialized section styling */
-        .vision {
-            background: rgba(255, 150, 143, 0.03);
+        .mission {
+            background: rgba(255, 150, 143, 0.05);
             border: 1px solid rgba(255, 150, 143, 0.2);
         }
 
-        .vision .section-title {
+        .mission .section-title {
             background: linear-gradient(135deg, #ff968f 0%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -270,7 +325,7 @@
         }
 
         .what-we-do {
-            background: rgba(237, 96, 113, 0.03);
+            background: rgba(237, 96, 113, 0.05);
             border: 1px solid rgba(237, 96, 113, 0.2);
         }
 
@@ -281,19 +336,18 @@
             background-clip: text;
         }
 
-        .who-were-for {
-            background: rgba(255, 255, 255, 0.03);
+        .current-focus {
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .who-were-for .section-title {
+        .current-focus .section-title {
             background: linear-gradient(135deg, #ffffff 0%, #ff968f 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        /* Accent lines */
         .section-card::before {
             content: '';
             position: absolute;
@@ -304,9 +358,10 @@
             background: linear-gradient(90deg, transparent, #ff968f, transparent);
             opacity: 0;
             transition: opacity 0.6s ease;
+            border-radius: 10px 10px 0 0;
         }
 
-        .vision::before {
+        .mission::before {
             background: linear-gradient(90deg, transparent, #ff968f, transparent);
         }
 
@@ -314,7 +369,7 @@
             background: linear-gradient(90deg, transparent, #ed6071, transparent);
         }
 
-        .who-were-for::before {
+        .current-focus::before {
             background: linear-gradient(90deg, transparent, #ffffff, transparent);
         }
 
@@ -322,7 +377,6 @@
             opacity: 1;
         }
 
-        /* Dev phase indicator */
         .dev-indicator {
             display: inline-flex;
             align-items: center;
@@ -337,28 +391,60 @@
         }
 
         .dev-indicator::before {
-            content: '⚡';
+            content: '🚀';
             margin-right: 8px;
         }
 
-        /* Footer */
+        .highlight-text {
+            color: #ff968f;
+            font-weight: 600;
+        }
+
         footer {
-            background: linear-gradient(135deg, rgba(10, 10, 15, 0.8) 0%, rgba(20, 20, 30, 0.8) 100%);
-            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 15, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding: 40px 0;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: auto;
+            margin-top: 60px;
         }
 
         .footer-text {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1rem;
-            font-weight: 400;
+            color: rgba(226, 232, 240, 0.6);
+            font-size: 0.9rem;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-content {
+                justify-content: space-between;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 20, 25, 0.98);
+                backdrop-filter: blur(20px);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-link {
+                width: calc(100% - 32px);
+                margin: 4px 16px;
+                padding: 12px 16px;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
             .logo {
                 font-size: 3.2rem;
                 letter-spacing: -2px;
@@ -375,21 +461,21 @@
             }
 
             .section-title {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
 
             .section-content {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 padding: 0 10px;
             }
 
             .section-card {
-                padding: 40px 30px;
+                padding: 30px 25px;
                 margin: 30px 10px;
             }
 
             header {
-                padding: 60px 0 80px;
+                padding: 120px 0 60px;
             }
         }
 
@@ -404,19 +490,18 @@
             }
 
             .section-content {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             .section-card {
-                padding: 30px 20px;
+                padding: 25px 20px;
             }
 
             .section-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
         }
 
-        /* Smooth reveal animations */
         .section {
             opacity: 0;
             transform: translateY(30px);
@@ -443,117 +528,106 @@
             to { opacity: 1; }
         }
 
-        /* Micro-interactions */
         .section-content p {
             transition: color 0.3s ease;
         }
 
         .section-card:hover .section-content p {
-            color: rgba(255, 255, 255, 0.95);
+            color: rgba(226, 232, 240, 0.95);
         }
     </style>
 </head>
 <body>
+    <nav>
+        <div class="nav-content">
+            <button class="nav-toggle" onclick="toggleNav()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="/index.html" class="nav-link active">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/research.html" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
+                        </svg>
+                        Research
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/projects.html" class="nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09c.66 0 1.26-.39 1.51-1a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09c.61-.16 1-.75 1-1.37V3a2 2 0 1 1 4 0v.09c0 .66.39 1.26 1 1.51h.09c.41.17.87.11 1.22-.13a1.65 1.65 0 0 0 .6-.6 2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09c.16.61.75 1 1.37 1H21a2 2 0 1 1 0 4h-.09c-.62 0-1.21.39-1.37 1z"/>
+                        </svg>
+                        Projects
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blog.html" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+                        </svg>
+                        Blog
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contact.html" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+                        </svg>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
     <div class="particles">
-        <!-- Add more particles -->
-        <div class="particle" style="left: 5%; animation-delay: 0s;"></div>
-        <div class="particle" style="left: 10%; animation-delay: 1s;"></div>
-        <div class="particle" style="left: 15%; animation-delay: 2s;"></div>
-        <div class="particle" style="left: 20%; animation-delay: 3s;"></div>
-        <div class="particle" style="left: 25%; animation-delay: 4s;"></div>
-        <div class="particle" style="left: 30%; animation-delay: 0.5s;"></div>
-        <div class="particle" style="left: 35%; animation-delay: 1.5s;"></div>
-        <div class="particle" style="left: 40%; animation-delay: 2.5s;"></div>
-        <div class="particle" style="left: 45%; animation-delay: 3.5s;"></div>
-        <div class="particle" style="left: 50%; animation-delay: 0s;"></div>
-        <div class="particle" style="left: 55%; animation-delay: 1s;"></div>
-        <div class="particle" style="left: 60%; animation-delay: 2s;"></div>
-        <div class="particle" style="left: 65%; animation-delay: 3s;"></div>
-        <div class="particle" style="left: 70%; animation-delay: 4s;"></div>
-        <div class="particle" style="left: 75%; animation-delay: 0.7s;"></div>
-        <div class="particle" style="left: 80%; animation-delay: 1.7s;"></div>
-        <div class="particle" style="left: 85%; animation-delay: 2.7s;"></div>
-        <div class="particle" style="left: 90%; animation-delay: 3.7s;"></div>
-        <div class="particle" style="left: 95%; animation-delay: 4.5s;"></div>
-        <div class="particle" style="left: 3%; animation-delay: 1.2s;"></div>
-        <div class="particle" style="left: 8%; animation-delay: 2.8s;"></div>
-        <div class="particle" style="left: 13%; animation-delay: 4.2s;"></div>
-        <div class="particle" style="left: 18%; animation-delay: 0.3s;"></div>
-        <div class="particle" style="left: 23%; animation-delay: 1.8s;"></div>
-        <div class="particle" style="left: 28%; animation-delay: 3.3s;"></div>
-        <div class="particle" style="left: 33%; animation-delay: 0.8s;"></div>
-        <div class="particle" style="left: 38%; animation-delay: 2.3s;"></div>
-        <div class="particle" style="left: 43%; animation-delay: 4.8s;"></div>
-        <div class="particle" style="left: 48%; animation-delay: 1.3s;"></div>
-        <div class="particle" style="left: 53%; animation-delay: 3.8s;"></div>
-        <div class="particle" style="left: 58%; animation-delay: 0.1s;"></div>
-        <div class="particle" style="left: 63%; animation-delay: 2.1s;"></div>
-        <div class="particle" style="left: 68%; animation-delay: 4.3s;"></div>
-        <div class="particle" style="left: 73%; animation-delay: 1.6s;"></div>
-        <div class="particle" style="left: 78%; animation-delay: 3.1s;"></div>
-        <div class="particle" style="left: 83%; animation-delay: 0.6s;"></div>
-        <div class="particle" style="left: 88%; animation-delay: 2.6s;"></div>
-        <div class="particle" style="left: 93%; animation-delay: 4.1s;"></div>
-        <div class="particle" style="left: 98%; animation-delay: 1.9s;"></div>
-        <!-- Additional 50% more particles -->
-        <div class="particle" style="left: 7%; animation-delay: 0.4s;"></div>
-        <div class="particle" style="left: 12%; animation-delay: 1.4s;"></div>
-        <div class="particle" style="left: 17%; animation-delay: 2.4s;"></div>
-        <div class="particle" style="left: 22%; animation-delay: 3.4s;"></div>
-        <div class="particle" style="left: 27%; animation-delay: 4.4s;"></div>
-        <div class="particle" style="left: 32%; animation-delay: 0.9s;"></div>
-        <div class="particle" style="left: 37%; animation-delay: 1.9s;"></div>
-        <div class="particle" style="left: 42%; animation-delay: 2.9s;"></div>
-        <div class="particle" style="left: 47%; animation-delay: 3.9s;"></div>
-        <div class="particle" style="left: 52%; animation-delay: 0.2s;"></div>
-        <div class="particle" style="left: 57%; animation-delay: 1.1s;"></div>
-        <div class="particle" style="left: 62%; animation-delay: 2.2s;"></div>
-        <div class="particle" style="left: 67%; animation-delay: 3.2s;"></div>
-        <div class="particle" style="left: 72%; animation-delay: 4.2s;"></div>
-        <div class="particle" style="left: 77%; animation-delay: 0.72s;"></div>
-        <div class="particle" style="left: 82%; animation-delay: 1.72s;"></div>
-        <div class="particle" style="left: 87%; animation-delay: 2.72s;"></div>
-        <div class="particle" style="left: 92%; animation-delay: 3.72s;"></div>
-        <div class="particle" style="left: 97%; animation-delay: 4.52s;"></div>
-        <div class="particle" style="left: 1%; animation-delay: 1.25s;"></div>
+        <!-- Particles will be generated by JavaScript -->
     </div>
     
     <header>
         <div class="container">
             <h1 class="logo">Fragment9</h1>
-            <p class="tagline">ML-Driven Cybersecurity Research & Development</p>
-            <a href="mailto:fragment9team@gmail.com" class="contact-btn">Contact Us</a>
+            <p class="tagline">Cybersecurity Research & Development Laboratory</p>
+            <a href="/contact.html" class="contact-btn">Get In Touch</a>
         </div>
     </header>
 
     <main>
         <div class="container">
             <section class="section">
-                <div class="section-card glass vision">
-                    <div class="dev-indicator">Development Phase</div>
-                    <h2 class="section-title">Our Vision</h2>
+                <div class="section-card mission">
+                    <div class="dev-indicator">Research Laboratory</div>
+                    <h2 class="section-title">Our Mission</h2>
                     <div class="section-content">
-                        <p>Fragment9 aims to redefine cybersecurity through intelligent, machine learning–driven tools that proactively defend creators, users, and digital systems against modern threats.</p>
-                        <p>Our vision is to make advanced threat detection and data protection accessible and privacy-focused—fusing research with real-world application. As we continue building, Fragment9 remains in its development phase, focused on prototyping, testing, and validating open-source tools that bridge innovation and defense.</p>
+                        <p>Fragment9 is an independent <span class="highlight-text">cybersecurity research laboratory</span> dedicated to advancing defensive capabilities through innovative machine learning applications and practical security solutions.</p>
+                        <p>We bridge the gap between academic research and real-world implementation, developing <span class="highlight-text">open-source tools and methodologies</span> that strengthen the global cybersecurity ecosystem while maintaining a focus on privacy-preserving technologies.</p>
                     </div>
                 </div>
             </section>
 
             <section class="section">
-                <div class="section-card glass what-we-do">
-                    <h2 class="section-title">What We Do</h2>
+                <div class="section-card what-we-do">
+                    <h2 class="section-title">Research Focus</h2>
                     <div class="section-content">
-                        <p>Fragment9 is an early-stage cybersecurity startup and R&D lab designing machine learning-based security tools across multiple domains: threat detection and anomaly-based IDS, phishing detection using NLP, data leak and privacy breach monitoring, and malware analysis with behavioral classification.</p>
-                        <p>We're currently in stealth mode, focusing on open-source tooling, lightweight deployments, and real-world usability as we lay the groundwork for potential SaaS offerings and contributions to the broader cybersecurity community.</p>
+                        <p>Our research spans <span class="highlight-text">machine learning-driven threat detection</span>, behavioral analysis for anomaly identification, and privacy-preserving security technologies. We specialize in lightweight, deployable solutions suitable for resource-constrained environments.</p>
+                        <p>Current active projects include <span class="highlight-text">Project AEGIS</span> (ML-based network anomaly detection) and <span class="highlight-text">Project SHADOW</span> (privacy-preserving behavioral analytics), both designed to address modern cybersecurity challenges with practical, scalable approaches.</p>
                     </div>
                 </div>
             </section>
 
             <section class="section">
-                <div class="section-card glass who-were-for">
-                    <h2 class="section-title">Who We're For</h2>
+                <div class="section-card current-focus">
+                    <h2 class="section-title">Current Phase</h2>
                     <div class="section-content">
-                        <p>We support independent creators, digital entrepreneurs, and small organizations who want to stay secure without big budgets. Our tools are designed for those who need enterprise-level protection with accessible, privacy-focused solutions.</p>
+                        <p>Fragment9 is currently in its <span class="highlight-text">research and development phase</span>, focusing on prototype validation and establishing research partnerships with academic institutions and industry collaborators.</p>
+                        <p>Our approach emphasizes <span class="highlight-text">open-source contributions</span> and transparent research methodologies, with plans to transition promising research outcomes into production-ready security tools and potential commercial applications.</p>
                     </div>
                 </div>
             </section>
@@ -562,8 +636,96 @@
 
     <footer>
         <div class="container">
-            <p class="footer-text">© 2025 Fragment9. Built with ❤️</p>
+            <p class="footer-text">© 2025 Fragment9. Advancing cybersecurity through research and innovation.</p>
         </div>
     </footer>
+
+    <script>
+        function toggleNav() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const navMenu = document.getElementById('navMenu');
+            
+            if (!nav.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        function updateActiveNav() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPath || 
+                    (currentPath === '/' && link.getAttribute('href') === '/index.html')) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        updateActiveNav();
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Position particles only within viewport width
+            const leftPos = Math.random() * 100;
+            particle.style.left = leftPos + '%';
+            
+            // Randomize animation timing and duration
+            const duration = 8 + Math.random() * 4; // 8-12 seconds
+            const delay = Math.random() * 2; // 0-2 second delay
+            
+            particle.style.animation = `floatUp ${duration}s linear ${delay}s forwards`;
+            
+            // Random colors
+            const colors = ['#ff968f', '#ed6071', '#ffffff'];
+            const colorIndex = Math.floor(Math.random() * colors.length);
+            particle.style.background = colors[colorIndex];
+            
+            document.querySelector('.particles').appendChild(particle);
+            
+            // Remove particle after animation completes
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, (duration + delay + 1) * 1000);
+        }
+
+        function initParticles() {
+            // Create initial batch with staggered timing
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createParticle, i * 300);
+            }
+        }
+
+        // Initialize particles after page load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initParticles, 500); // Wait for page to fully load
+        });
+
+        // Continue creating particles at intervals
+        setInterval(createParticle, 600);
+    </script>
 </body>
 </html>
