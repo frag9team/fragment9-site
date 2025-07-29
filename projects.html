@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Fragment9 - Cybersecurity R&D Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #0f1419;
+            color: #e2e8f0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 150, 143, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 150, 143, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 2px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 18px;
+            color: rgba(226, 232, 240, 0.7);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: #ff968f;
+            background: rgba(255, 150, 143, 0.08);
+            border-color: rgba(255, 150, 143, 0.2);
+        }
+
+        .nav-link.active {
+            color: #ff968f;
+            background: rgba(255, 150, 143, 0.12);
+            border-color: rgba(255, 150, 143, 0.3);
+            font-weight: 600;
+        }
+
+        .nav-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+        }
+
+        header {
+            padding: 120px 0 50px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(180deg, rgba(15, 20, 25, 0.8) 0%, rgba(15, 20, 25, 1) 100%);
+        }
+
+        .header-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            text-align: left;
+            max-width: 900px;
+        }
+
+        .page-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #ff968f;
+            margin-bottom: 25px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .page-description {
+            font-size: 1.1rem;
+            color: rgba(226, 232, 240, 0.8);
+            line-height: 1.7;
+            max-width: 700px;
+        }
+
+        main {
+            padding: 60px 0;
+        }
+
+        .content-section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 150, 143, 0.2);
+        }
+
+        .section-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(255, 150, 143, 0.3);
+            margin-right: 20px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: rgba(226, 232, 240, 0.6);
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 35px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-color);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card.aegis { --accent-color: #ff968f; }
+        .project-card.shadow { --accent-color: #ed6071; }
+        .project-card.future { --accent-color: #a78bfa; }
+
+        .project-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+            color: var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .project-status {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 12px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .project-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(226, 232, 240, 0.85);
+            margin-bottom: 25px;
+        }
+
+        .project-features {
+            margin-bottom: 25px;
+        }
+
+        .project-features h4 {
+            font-size: 0.9rem;
+            color: #ff968f;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            font-size: 0.9rem;
+            color: rgba(226, 232, 240, 0.8);
+            margin-bottom: 6px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(226, 232, 240, 0.9);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            background: var(--accent-color);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-link.disabled {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(226, 232, 240, 0.5);
+            cursor: not-allowed;
+        }
+
+        .project-link.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .coming-soon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .coming-soon-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .coming-soon-card:hover {
+            border-color: rgba(255, 150, 143, 0.4);
+            background: rgba(255, 150, 143, 0.02);
+        }
+
+        .coming-soon-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            color: rgba(255, 150, 143, 0.6);
+        }
+
+        .coming-soon-card h3 {
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .coming-soon-card p {
+            font-size: 0.95rem;
+            color: rgba(226, 232, 240, 0.7);
+            line-height: 1.6;
+        }
+
+        footer {
+            background: rgba(10, 10, 15, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-text {
+            color: rgba(226, 232, 240, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #e2e8f0;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                justify-content: space-between;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 20, 25, 0.98);
+                backdrop-filter: blur(20px);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-link {
+                width: calc(100% - 32px);
+                margin: 4px 16px;
+                padding: 12px 16px;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .coming-soon-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .project-card {
+                padding: 25px;
+            }
+
+            header {
+                padding: 100px 0 40px;
+            }
+        }
+
+        .content-section {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .content-section:nth-child(1) { animation-delay: 0.1s; }
+        .content-section:nth-child(2) { animation-delay: 0.2s; }
+        .content-section:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <button class="nav-toggle" onclick="toggleNav()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="/index.html" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/research.html" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
+                        </svg>
+                        Research
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/projects.html" class="nav-link active">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09c.66 0 1.26-.39 1.51-1a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09c.61-.16 1-.75 1-1.37V3a2 2 0 1 1 4 0v.09c0 .66.39 1.26 1 1.51h.09c.41.17.87.11 1.22-.13a1.65 1.65 0 0 0 .6-.6 2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09c.16.61.75 1 1.37 1H21a2 2 0 1 1 0 4h-.09c-.62 0-1.21.39-1.37 1z"/>
+                        </svg>
+                        Projects
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blog.html" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+                        </svg>
+                        Blog
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/contact.html" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+                        </svg>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <p class="page-subtitle">Development Portfolio</p>
+                    <h1 class="page-title">Research Projects</h1>
+                    <p class="page-description">Fragment9's active research initiatives focus on developing practical cybersecurity solutions through machine learning applications, privacy-preserving technologies, and innovative defense mechanisms.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="content-section">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <div>
+                        <h2 class="section-title">Active Projects</h2>
+                        <p class="section-subtitle">Current research and development initiatives</p>
+                    </div>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card aegis">
+                        <div class="project-header">
+                            <svg class="project-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.4 16,13V16C16,17.4 15.4,18 14.8,18H9.2C8.6,18 8,17.4 8,16V13C8,12.4 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                            </svg>
+                            <div>
+                                <h3>Project AEGIS</h3>
+                            </div>
+                        </div>
+                        <div class="project-status">Phase I - Research</div>
+                        <div class="project-description">
+                            A lightweight, machine learning-based anomaly detection system designed for identifying unusual network traffic patterns in resource-constrained environments. AEGIS focuses on real-time threat classification with minimal computational overhead.
+                        </div>
+                        <div class="project-features">
+                            <h4>Key Features</h4>
+                            <ul class="feature-list">
+                                <li>Real-time network traffic analysis</li>
+                                <li>Lightweight ML models for edge deployment</li>
+                                <li>Adaptive threat classification algorithms</li>
+                                <li>Low-latency anomaly detection</li>
+                                <li>Resource-optimized architecture</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">Scapy</span>
+                            <span class="tech-tag">Neural Networks</span>
+                            <span class="tech-tag">Network Security</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link disabled">GitHub (Coming Soon)</a>
+                            <a href="#" class="project-link disabled">Documentation</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card shadow">
+                        <div class="project-header">
+                            <svg class="project-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"/>
+                            </svg>
+                            <div>
+                                <h3>Project SHADOW</h3>
+                            </div>
+                        </div>
+                        <div class="project-status">Phase I - Research</div>
+                        <div class="project-description">
+                            A privacy-preserving user behavior analytics system designed to detect insider threats and compromised accounts using machine learning techniques while maintaining user privacy through differential privacy methods.
+                        </div>
+                        <div class="project-features">
+                            <h4>Key Features</h4>
+                            <ul class="feature-list">
+                                <li>Privacy-preserving behavioral analysis</li>
+                                <li>Insider threat detection algorithms</li>
+                                <li>Differential privacy implementation</li>
+                                <li>User activity pattern recognition</li>
+                                <li>Zero-knowledge security architecture</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Cryptography</span>
+                            <span class="tech-tag">Differential Privacy</span>
+                            <span class="tech-tag">Behavioral Analytics</span>
+                            <span class="tech-tag">UEBA</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link disabled">GitHub (Coming Soon)</a>
+                            <a href="#" class="project-link disabled">Research Paper</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <div>
+                        <h2 class="section-title">Future Initiatives</h2>
+                        <p class="section-subtitle">Planned research directions and upcoming projects</p>
+                    </div>
+                </div>
+                <div class="coming-soon-grid">
+                    <div class="coming-soon-card">
+                        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9,12L11,14L15,10L13.59,8.59L11,11.17L9.41,9.59L8,11M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z"/>
+                        </svg>
+                        <h3>Threat Intelligence Platform</h3>
+                        <p>Automated threat intelligence aggregation and analysis system using natural language processing to process security feeds and generate actionable insights.</p>
+                    </div>
+
+                    <div class="coming-soon-card">
+                        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L18.29,8.29L16,6Z"/>
+                        </svg>
+                        <h3>ML-Powered Firewall</h3>
+                        <p>Next-generation firewall with integrated machine learning capabilities for dynamic rule generation and advanced persistent threat detection.</p>
+                    </div>
+
+                    <div class="coming-soon-card">
+                        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,5V19H5V5H19Z"/>
+                        </svg>
+                        <h3>Secure Communication Suite</h3>
+                        <p>End-to-end encrypted communication platform with advanced security features, designed for privacy-conscious organizations and individuals.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <div>
+                        <h2 class="section-title">Open Source Contributions</h2>
+                        <p class="section-subtitle">Community tools and resources</p>
+                    </div>
+                </div>
+                <div class="coming-soon-grid">
+                    <div class="coming-soon-card">
+                        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
+                        </svg>
+                        <h3>Security Analysis Tools</h3>
+                        <p>Collection of lightweight security analysis and penetration testing tools designed for educational purposes and security research.</p>
+                    </div>
+
+                    <div class="coming-soon-card">
+                        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                        </svg>
+                        <h3>Research Publications</h3>
+                        <p>Academic papers, whitepapers, and technical documentation from Fragment9's research initiatives, available for the cybersecurity community.</p>
+                    </div>
+
+                    <div class="coming-soon-card">
+                        <svg class="coming-soon-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 3C16.42 3 20 4.79 20 7V17C20 19.21 16.42 21 12 21C7.58 21 4 19.21 4 17V7C4 4.79 7.58 3 12 3M12 5C8.69 5 6 5.9 6 7C6 8.1 8.69 9 12 9C15.31 9 18 8.1 18 7C18 5.9 15.31 5 12 5M6 12C6 13.1 8.69 14 12 14C15.31 14 18 13.1 18 12V10.5C16.79 11.57 14.53 12 12 12C9.47 12 7.21 11.57 6 10.5V12M6 17C6 18.1 8.69 19 12 19C15.31 19 18 18.1 18 17V15.5C16.79 16.57 14.53 17 12 17C9.47 17 7.21 16.57 6 15.5V17Z"/>
+    </svg>
+                        <h3>Datasets & Models</h3>
+                        <p>Curated cybersecurity datasets and pre-trained machine learning models for threat detection and security research applications.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">© 2025 Fragment9. Advancing cybersecurity through research and innovation.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleNav() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
